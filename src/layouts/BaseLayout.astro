@@ -1,0 +1,41 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ShoppingCartPanel from '../components/ShoppingCartPanel.preact';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeNav?: string;
+}
+
+const { title, description = 'Akihabara Manga Store - Tu tienda de manga online', activeNav } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <Navigation activeNav={activeNav} />
+    
+    <main class="flex-grow">
+      <slot />
+    </main>
+    
+    <Footer />
+    
+    <!-- Panel del carrito (overlay) -->
+    <ShoppingCartPanel client:load />
+  </body>
+</html>

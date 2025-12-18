@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TiendaClient from '../components/TiendaClient.preact';
+import { getAvailableGenres } from '../services/anilistApi';
+
+const genres = getAvailableGenres();
+---
+
+<BaseLayout 
+  title="Tienda - Akihabara Manga Store"
+  description="Explora nuestro catálogo completo de mangas."
+  activeNav="tienda"
+>
+  <section class="py-8 bg-dark-50">
+    <div class="container mx-auto px-4">
+      <h1 class="font-display text-4xl text-dark-900 mb-4">
+        Catálogo de Mangas
+      </h1>
+      <p class="text-dark-600 text-lg" id="catalog-subtitle">
+        Explora nuestra colección de mangas
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="container mx-auto px-4">
+      <TiendaClient genres={genres} client:load />
+    </div>
+  </section>
+</BaseLayout>

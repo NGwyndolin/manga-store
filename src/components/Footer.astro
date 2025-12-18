@@ -1,0 +1,124 @@
+---
+import { appConfig } from '../services/config';
+
+const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  {
+    name: 'Twitter',
+    href: 'https://twitter.com',
+    icon: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z',
+  },
+  {
+    name: 'Instagram',
+    href: 'https://instagram.com',
+    icon: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 2h9A5.5 5.5 0 0122 7.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2z',
+  },
+  {
+    name: 'Facebook',
+    href: 'https://facebook.com',
+    icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z',
+  },
+  {
+    name: 'YouTube',
+    href: 'https://youtube.com',
+    icon: 'M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02l0-6.27 5.75 3.14-5.75 3.13z',
+  },
+];
+
+const footerSections = [
+  {
+    title: 'Navegación',
+    links: [
+      { label: 'Inicio', href: '/' },
+      { label: 'Tienda', href: '/tienda' },
+      { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
+      { label: 'Contacto', href: '/contacto' },
+    ],
+  },
+  {
+    title: 'Información',
+    links: [
+      { label: 'Dashboard', href: '/dashboard' },
+      { label: 'Comunidad', href: '/comunidad' },
+      { label: 'Ubicación', href: '/ubicacion' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Términos y Condiciones', href: '#' },
+      { label: 'Política de Privacidad', href: '#' },
+      { label: 'Política de Cookies', href: '#' },
+      { label: 'Envíos y Devoluciones', href: '#' },
+    ],
+  },
+];
+---
+
+<footer class="bg-dark-900 text-dark-100 mt-auto">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <!-- Logo y descripción -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <div class="bg-primary-500 text-white font-display text-2xl px-3 py-2 rounded-lg">
+            AMS
+          </div>
+          <span class="font-display text-xl text-white">
+            {appConfig.storeName}
+          </span>
+        </div>
+        <p class="text-dark-300 mb-4">
+          Tu tienda de confianza en el corazón de Akihabara. Especialistas en manga con la mejor selección de títulos japoneses.
+        </p>
+        <div class="flex space-x-4">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-dark-400 hover:text-primary-500 transition-colors"
+              aria-label={social.name}
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={social.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Secciones de enlaces -->
+      {footerSections.map((section) => (
+        <div>
+          <h3 class="text-white font-semibold mb-4">{section.title}</h3>
+          <ul class="space-y-2">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-dark-300 hover:text-primary-400 transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Línea divisoria -->
+    <div class="border-t border-dark-700 mt-8 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <p class="text-dark-400 text-sm">
+          © {currentYear} {appConfig.storeName}. Todos los derechos reservados.
+        </p>
+        <p class="text-dark-400 text-sm">
+          Desarrollado con <span class="text-primary-500">♥</span> usando Astro + Preact
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,20 @@
+---
+const url = Astro.url;
+const searchParam = url.searchParams.get('search');
+---
+
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+  <h1>Test de Parámetros URL</h1>
+  <p>URL completa: {url.toString()}</p>
+  <p>Parámetro search: {searchParam || 'null'}</p>
+  
+  <form method="get" action="/test">
+    <input type="text" name="search" placeholder="Buscar" />
+    <button type="submit">Buscar</button>
+  </form>
+</body>
+</html>

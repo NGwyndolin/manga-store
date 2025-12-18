@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+</head>
+<body class="bg-dark-50">
+  <!-- Main Content sin sidebar -->
+  <main class="min-h-screen">
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-dark-200 sticky top-0 z-20 shadow-sm">
+      <div class="flex items-center justify-between px-4 lg:px-8 py-4">
+        <div class="flex items-center gap-4">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-bold text-dark-900">{title}</h2>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2 lg:gap-4">
+          <!-- Notificaciones -->
+          <button class="relative p-2 text-dark-600 hover:bg-dark-100 rounded-lg transition-colors">
+            <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+
+          <!-- Volver a la tienda -->
+          <a href="/" class="btn-secondary text-xs lg:text-sm whitespace-nowrap flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Volver a la Tienda
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="p-4 lg:p-8">
+      <slot />
+    </div>
+  </main>
+</body>
+</html>
