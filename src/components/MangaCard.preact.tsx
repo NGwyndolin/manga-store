@@ -12,7 +12,7 @@ export default function MangaCard({ manga }: Props) {
   const [quantity, setQuantity] = useState(1);
   const [showNotification, setShowNotification] = useState(false);
 
-  const currentCartItem = cart?.items ? cart.items.find(item => item.manga.id === manga.id) : null;
+  const currentCartItem = cart?.items ? cart.items.find(item => item.mangaId === manga.id) : null;
   const currentCartQuantity = currentCartItem ? currentCartItem.quantity : 0;
   const availableStock = manga.stock - currentCartQuantity;
   const isOutOfStock = availableStock <= 0;

@@ -1,11 +1,6 @@
-import { atom } from 'nanostores';
 import { persistentAtom } from '@nanostores/persistent';
-import type { Manga } from '../types/index';
-
-export interface CartItem {
-  manga: Manga;
-  quantity: number;
-}
+import { computed } from 'nanostores';
+import type { Manga, CartItem } from '../types/index';
 
 export interface Cart {
   items: CartItem[];
@@ -14,7 +9,7 @@ export interface Cart {
 
 // Función auxiliar para calcular el total
 function calculateTotal(items: CartItem[]): number {
-  return items.reduce((sum, item) => sum + item.manga.price * item.quantity, 0);
+  return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
 // Valor inicial del carrito
@@ -45,10 +40,81 @@ export const $cart = persistentAtom<Cart>(
   }
 );
 
-// Acciones del carrito
+// EXPORTACIONES DERIVADAS para el componente ShoppingCart
+export const cartItems = computed($cart, (cart) => cart.items);
+export const totalItems = computed($cart, (cart) => 
+  cart.items.reduce((sum, item) => sum + item.quantity, 0)
+);
+export const totalPrice = computed($cart, (cart) => cart.total);
+
+// Re-exportar el tipo CartItem para uso en otros archivos
+export type { CartItem };
+
+// FUNCIONES EXPORTADAS directamente
+export const incrementQuantity = (mangaId: number): void => {
+  const currentCart = $cart.get();
+  
+  if (!currentCart || !Array.isArray(currentCart.items)) {
+    console.warn('Cart not initialized properly');
+    return;
+  }
+  
+  const newItems = currentCart.items.map((item) =>
+    item.mangaId === mangaId
+      ? { ...item, quantity: Math.min(item.quantity + 1, item.maxStock) }
+      : item
+  );
+
+  $cart.set({
+    items: newItems,
+    total: calculateTotal(newItems),
+  });
+};
+
+export const decrementQuantity = (mangaId: number): void => {
+  const currentCart = $cart.get();
+  
+  if (!currentCart || !Array.isArray(currentCart.items)) {
+    console.warn('Cart not initialized properly');
+    return;
+  }
+  
+  const newItems = currentCart.items.map((item) =>
+    item.mangaId === mangaId && item.quantity > 1
+      ? { ...item, quantity: item.quantity - 1 }
+      : item
+  );
+
+  $cart.set({
+    items: newItems,
+    total: calculateTotal(newItems),
+  });
+};
+
+export const removeFromCart = (mangaId: number): void => {
+  const currentCart = $cart.get();
+  
+  if (!currentCart || !Array.isArray(currentCart.items)) {
+    console.warn('Cart not initialized properly');
+    return;
+  }
+  
+  const newItems = currentCart.items.filter((item) => item.mangaId !== mangaId);
+
+  $cart.set({
+    items: newItems,
+    total: calculateTotal(newItems),
+  });
+};
+
+export const clearCart = (): void => {
+  $cart.set(initialCart);
+};
+
+// Acciones del carrito (mantener compatibilidad con código existente)
 export const cartStore = {
   // Añadir item al carrito
-  addItem: (manga: Manga, quantity: number = 1) => {
+  addItem: (manga: Manga, quantity: number = 1): void => {
     const currentCart = $cart.get();
     
     // Protección adicional
@@ -59,7 +125,7 @@ export const cartStore = {
     }
     
     const existingItemIndex = currentCart.items.findIndex(
-      (item) => item.manga.id === manga.id
+      (item) => item.mangaId === manga.id
     );
 
     let newItems: CartItem[];
@@ -67,11 +133,20 @@ export const cartStore = {
     if (existingItemIndex >= 0) {
       newItems = currentCart.items.map((item, index) =>
         index === existingItemIndex
-          ? { ...item, quantity: Math.min(item.quantity + quantity, manga.stock) }
+          ? { ...item, quantity: Math.min(item.quantity + quantity, item.maxStock) }
           : item
       );
     } else {
-      newItems = [...currentCart.items, { manga, quantity: Math.min(quantity, manga.stock) }];
+      // Crear nuevo CartItem con la estructura correcta
+      const newCartItem: CartItem = {
+        mangaId: manga.id,
+        title: manga.title.romaji,
+        price: manga.price,
+        quantity: Math.min(quantity, manga.stock),
+        coverImage: manga.coverImage.large,
+        maxStock: manga.stock
+      };
+      newItems = [...currentCart.items, newCartItem];
     }
 
     $cart.set({
@@ -81,7 +156,7 @@ export const cartStore = {
   },
 
   // Actualizar cantidad de un item
-  updateQuantity: (mangaId: number, quantity: number) => {
+  updateQuantity: (mangaId: number, quantity: number): void => {
     const currentCart = $cart.get();
     
     if (!currentCart || !Array.isArray(currentCart.items)) {
@@ -90,8 +165,8 @@ export const cartStore = {
     }
     
     const newItems = currentCart.items.map((item) =>
-      item.manga.id === mangaId
-        ? { ...item, quantity: Math.max(0, Math.min(quantity, item.manga.stock)) }
+      item.mangaId === mangaId
+        ? { ...item, quantity: Math.max(0, Math.min(quantity, item.maxStock)) }
         : item
     ).filter(item => item.quantity > 0);
 
@@ -102,24 +177,12 @@ export const cartStore = {
   },
 
   // Eliminar item del carrito
-  removeItem: (mangaId: number) => {
-    const currentCart = $cart.get();
-    
-    if (!currentCart || !Array.isArray(currentCart.items)) {
-      console.warn('Cart not initialized properly');
-      return;
-    }
-    
-    const newItems = currentCart.items.filter((item) => item.manga.id !== mangaId);
-
-    $cart.set({
-      items: newItems,
-      total: calculateTotal(newItems),
-    });
+  removeItem: (mangaId: number): void => {
+    removeFromCart(mangaId);
   },
 
   // Vaciar carrito
-  clearCart: () => {
-    $cart.set(initialCart);
+  clearCart: (): void => {
+    clearCart();
   },
 };

@@ -4,8 +4,8 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://NGwyndolin.github.io',
-  base: '/manga-store',
+  site: 'https://tu-proyecto.vercel.app', // URL de Vercel
+  // NO incluir 'base' para Vercel
   
   integrations: [
     preact({

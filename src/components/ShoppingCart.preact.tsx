@@ -6,14 +6,17 @@ import {
   incrementQuantity, 
   decrementQuantity, 
   removeFromCart,
-  clearCart 
+  clearCart,
+  type CartItem  
 } from '../stores/cartStore';
 import { formatPrice } from '../utils/priceGenerator';
+
 
 export default function ShoppingCart() {
   const $cartItems = useStore(cartItems);
   const $totalItems = useStore(totalItems);
   const $totalPrice = useStore(totalPrice);
+
 
   const handleCheckout = () => {
     if ($cartItems.length === 0) return;
@@ -21,6 +24,7 @@ export default function ShoppingCart() {
     alert('¡Gracias por tu compra! Esta es una demo, no se procesará ningún pago real.');
     clearCart();
   };
+
 
   if ($cartItems.length === 0) {
     return (
@@ -37,6 +41,7 @@ export default function ShoppingCart() {
     );
   }
 
+
   return (
     <div class="bg-white rounded-lg shadow-md p-6">
       <div class="flex items-center justify-between mb-6">
@@ -46,9 +51,12 @@ export default function ShoppingCart() {
         </span>
       </div>
 
+
       {/* Items del carrito */}
       <div class="space-y-4 mb-6 max-h-96 overflow-y-auto">
-        {$cartItems.map((item) => (
+        {$cartItems.map((item: CartItem) => (
+
+
           <div key={item.mangaId} class="flex gap-3 border-b border-dark-200 pb-4">
             {/* Imagen */}
             <img
@@ -57,12 +65,14 @@ export default function ShoppingCart() {
               class="w-16 h-24 object-cover rounded"
             />
 
+
             {/* Info */}
             <div class="flex-1">
               <h3 class="font-semibold text-sm mb-1 line-clamp-2">{item.title}</h3>
               <p class="text-primary-600 font-bold mb-2">
                 {formatPrice(item.price)}
               </p>
+
 
               {/* Controles de cantidad */}
               <div class="flex items-center gap-2">
@@ -93,6 +103,7 @@ export default function ShoppingCart() {
                 </button>
               </div>
 
+
               {/* Subtotal */}
               <p class="text-sm text-dark-600 mt-2">
                 Subtotal: {formatPrice(item.price * item.quantity)}
@@ -101,6 +112,7 @@ export default function ShoppingCart() {
           </div>
         ))}
       </div>
+
 
       {/* Resumen */}
       <div class="border-t border-dark-200 pt-4 space-y-2">
@@ -118,6 +130,7 @@ export default function ShoppingCart() {
         </div>
       </div>
 
+
       {/* Botones de acción */}
       <div class="mt-6 space-y-2">
         <button
@@ -133,6 +146,7 @@ export default function ShoppingCart() {
           Vaciar Carrito
         </button>
       </div>
+
 
       {/* Mensaje de envío gratis */}
       <div class="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">

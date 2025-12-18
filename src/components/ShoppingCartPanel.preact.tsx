@@ -1,9 +1,11 @@
 import { useStore } from '@nanostores/preact';
 import { $cart, cartStore } from '../stores/cartStore';
-import type { CartItem } from '../stores/cartStore';
+import type { CartItem } from '../types/index';
+
 
 export default function ShoppingCartPanel() {
   const cart = useStore($cart);
+
 
   const closeCart = () => {
     const cartPanel = document.getElementById('shopping-cart-panel');
@@ -12,22 +14,27 @@ export default function ShoppingCartPanel() {
     }
   };
 
+
   const updateQuantity = (id: number, newQuantity: number) => {
     cartStore.updateQuantity(id, newQuantity);
   };
+
 
   const removeItem = (id: number) => {
     cartStore.removeItem(id);
   };
 
+
   const clearCart = () => {
     cartStore.clearCart();
   };
+
 
   // Protección contra undefined durante hidratación
   const totalItems = cart?.items ? cart.items.reduce((sum: number, item: CartItem) => sum + item.quantity, 0) : 0;
   const items = cart?.items || [];
   const total = cart?.total || 0;
+
 
   return (
     <div
@@ -63,6 +70,7 @@ export default function ShoppingCartPanel() {
           </button>
         </div>
 
+
         {/* Contenido */}
         {items.length === 0 ? (
           <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
@@ -83,22 +91,22 @@ export default function ShoppingCartPanel() {
             {/* Lista de items */}
             <div class="flex-1 overflow-y-auto p-6 space-y-4">
               {items.map((item: CartItem) => (
-                <div key={item.manga.id} class="flex gap-4 bg-dark-50 rounded-lg p-4">
+                <div key={item.mangaId} class="flex gap-4 bg-dark-50 rounded-lg p-4">
                   <img
-                    src={item.manga.coverImage.medium}
-                    alt={item.manga.title.romaji}
+                    src={item.coverImage}
+                    alt={item.title}
                     class="w-20 h-28 object-cover rounded"
                   />
                   <div class="flex-1 min-w-0">
                     <h4 class="font-semibold text-dark-900 line-clamp-2 mb-2">
-                      {item.manga.title.romaji}
+                      {item.title}
                     </h4>
                     <p class="text-primary-600 font-bold mb-3">
-                      €{item.manga.price.toFixed(2)}
+                      €{item.price.toFixed(2)}
                     </p>
                     <div class="flex items-center gap-2">
                       <button
-                        onClick={() => updateQuantity(item.manga.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.mangaId, item.quantity - 1)}
                         class="w-8 h-8 flex items-center justify-center border border-dark-300 rounded hover:bg-dark-100 transition-colors"
                         aria-label="Disminuir cantidad"
                       >
@@ -106,15 +114,15 @@ export default function ShoppingCartPanel() {
                       </button>
                       <span class="w-8 text-center font-medium">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.manga.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.mangaId, item.quantity + 1)}
                         class="w-8 h-8 flex items-center justify-center border border-dark-300 rounded hover:bg-dark-100 transition-colors"
-                        disabled={item.quantity >= item.manga.stock}
+                        disabled={item.quantity >= item.maxStock}
                         aria-label="Aumentar cantidad"
                       >
                         +
                       </button>
                       <button
-                        onClick={() => removeItem(item.manga.id)}
+                        onClick={() => removeItem(item.mangaId)}
                         class="ml-auto text-red-600 hover:text-red-700 transition-colors"
                         aria-label="Eliminar del carrito"
                       >
@@ -127,6 +135,7 @@ export default function ShoppingCartPanel() {
                 </div>
               ))}
             </div>
+
 
             {/* Footer con total */}
             <div class="border-t border-dark-200 p-6 bg-dark-50 space-y-4">
