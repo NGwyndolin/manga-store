@@ -147,3 +147,118 @@ const featuredMangas = await getPopularMangas(6);
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animación del Hero Section al cargar
+  const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  
+  heroTimeline
+    .from('section:first-of-type h1', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    })
+    .from('section:first-of-type p', {
+      y: 30,
+      opacity: 0,
+      duration: 0.8
+    }, '-=0.5')
+    .from('section:first-of-type .flex.gap-4 a', {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.2,
+      clearProps: 'all'
+    }, '-=0.4');
+
+  // Animación de las estadísticas con stagger
+  gsap.from('.bg-dark-50 > div > div', {
+    scrollTrigger: {
+      trigger: '.bg-dark-50',
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'back.out(1.2)',
+    clearProps: 'all'
+  });
+
+  // Animación del título de Mangas Populares
+  gsap.from('section:nth-of-type(3) .text-center', {
+    scrollTrigger: {
+      trigger: 'section:nth-of-type(3)',
+      start: 'top 75%'
+    },
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    clearProps: 'all'
+  });
+
+  // Animación del grid de mangas
+  gsap.from('section:nth-of-type(3) .grid > div', {
+    scrollTrigger: {
+      trigger: 'section:nth-of-type(3) .grid',
+      start: 'top 70%'
+    },
+    y: 60,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: 'power2.out',
+    clearProps: 'all'
+  });
+
+  // Animación del botón "Ver Todo el Catálogo"
+  gsap.from('section:nth-of-type(3) .text-center:last-of-type', {
+    scrollTrigger: {
+      trigger: 'section:nth-of-type(3) .text-center:last-of-type',
+      start: 'top 85%'
+    },
+    scale: 0.8,
+    opacity: 0,
+    duration: 0.6,
+    clearProps: 'all'
+  });
+
+  // Animación del Call to Action
+  gsap.from('section:nth-of-type(4) > div > *', {
+    scrollTrigger: {
+      trigger: 'section:nth-of-type(4)',
+      start: 'top 70%'
+    },
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    clearProps: 'all'
+  });
+
+  // Animación de las tarjetas "Por Qué Elegirnos"
+  gsap.from('section:last-of-type .card', {
+    scrollTrigger: {
+      trigger: 'section:last-of-type .grid',
+      start: 'top 75%'
+    },
+    y: 80,
+    opacity: 0,
+    rotation: 5,
+    duration: 1,
+    stagger: {
+      amount: 0.6,
+      from: 'start'
+    },
+    ease: 'back.out(1.4)',
+    clearProps: 'all'
+  });
+</script>
+
+

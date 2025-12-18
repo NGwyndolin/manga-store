@@ -8,13 +8,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   activeNav="sobre-nosotros"
 >
   <!-- Header Simple -->
-  <section class="py-12 bg-gradient-to-br from-primary-500 to-secondary-600">
+  <section class="py-12 bg-gradient-to-br from-primary-500 to-secondary-600" id="about-hero">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto text-center">
-        <h1 class="font-display text-4xl md:text-5xl text-white mb-4">
+        <h1 class="font-display text-4xl md:text-5xl text-white mb-4" id="about-title">
           Sobre Nosotros
         </h1>
-        <p class="text-xl text-primary-50">
+        <p class="text-xl text-primary-50" id="about-subtitle">
           La historia detrás de tu tienda de manga favorita
         </p>
       </div>
@@ -22,15 +22,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Nuestra Historia -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white" id="our-story">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-dark-100">
-          <h2 class="font-display text-3xl text-dark-900 mb-6">
-            Todo comenzó con una pasión...<span class="text-white text-sm">Tener un chingo de porno</span>
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-dark-100" id="story-card">
+          <h2 class="font-display text-3xl text-dark-900 mb-6" id="story-title">
+            Todo comenzó con una pasión...<span class="text-white text-sm">Tener un chingo de porno.</span>
           </h2>
           
-          <div class="bg-gradient-to-r from-primary-50 to-secondary-50 border-l-4 border-primary-500 p-6 mb-8 rounded-r-xl shadow-md">
+          <div class="bg-gradient-to-r from-primary-50 to-secondary-50 border-l-4 border-primary-500 p-6 mb-8 rounded-r-xl shadow-md" id="founder-quote">
             <p class="text-lg text-dark-700 italic mb-3">
               "Recuerdo mi primer manga. Era un viejo tomo de Dragon Ball que encontré en una librería 
               de segunda mano. Desde ese momento, supe que el manga sería parte fundamental de mi vida."
@@ -38,14 +38,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p class="text-sm text-dark-600 font-semibold">— Kenji Tanaka, Fundador</p>
           </div>
 
-          <div class="space-y-5 text-dark-700 text-lg leading-relaxed">
-            <p>
+          <div class="space-y-5 text-dark-700 text-lg leading-relaxed" id="story-text">
+            <p class="story-paragraph">
               <strong class="text-primary-600">Akihabara Manga Store</strong> nació en 2020, cuando un 
               pequeño grupo de amigos otakus decidió hacer realidad un sueño: crear la tienda de manga 
               que siempre habían querido encontrar.
             </p>
 
-            <p>
+            <p class="story-paragraph">
               Con el nombre inspirado en el corazón otaku de Tokio, abrimos nuestra primera tienda online 
               desde un apartamento en Madrid. Los primeros meses fueron intensos, pero cada pedido empaquetado 
               con cariño y cada cliente satisfecho nos daba la energía para seguir adelante.
@@ -57,16 +57,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Timeline -->
-  <section class="py-16 bg-dark-50">
+  <section class="py-16 bg-dark-50" id="timeline-section">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <h2 class="font-display text-3xl text-dark-900 mb-12 text-center">
+        <h2 class="font-display text-3xl text-dark-900 mb-12 text-center" id="timeline-title">
           Nuestro Camino
         </h2>
         
-        <div class="space-y-6">
+        <div class="space-y-6" id="timeline-container">
           <!-- 2020 -->
-          <div class="flex gap-6">
+          <div class="timeline-item flex gap-6">
             <div class="flex-shrink-0">
               <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">
                 2020
@@ -82,7 +82,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <!-- 2021 -->
-          <div class="flex gap-6">
+          <div class="timeline-item flex gap-6">
             <div class="flex-shrink-0">
               <div class="w-20 h-20 bg-gradient-to-br from-secondary-500 to-secondary-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">
                 2021
@@ -98,7 +98,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <!-- 2022 -->
-          <div class="flex gap-6">
+          <div class="timeline-item flex gap-6">
             <div class="flex-shrink-0">
               <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">
                 2022
@@ -114,7 +114,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <!-- 2023 -->
-          <div class="flex gap-6">
+          <div class="timeline-item flex gap-6">
             <div class="flex-shrink-0">
               <div class="w-20 h-20 bg-gradient-to-br from-secondary-500 to-secondary-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">
                 2023
@@ -129,7 +129,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <!-- 2024-Hoy -->
-          <div class="flex gap-6">
+          <div class="timeline-item flex gap-6">
             <div class="flex-shrink-0">
               <div class="w-20 h-20 bg-gradient-to-br from-primary-500 via-secondary-500 to-primary-600 text-white rounded-xl flex items-center justify-center font-bold shadow-lg">
                 <span class="text-sm">Hoy</span>
@@ -148,10 +148,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Valores -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white" id="values-section">
     <div class="container mx-auto px-4">
       <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" id="values-header">
           <h2 class="font-display text-3xl text-dark-900 mb-4">
             Lo que nos mueve
           </h2>
@@ -160,8 +160,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg border border-primary-200 hover:shadow-xl transition-shadow">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="values-grid">
+          <div class="value-card bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg border border-primary-200 hover:shadow-xl transition-shadow">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center shadow-md">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +177,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
 
-          <div class="bg-gradient-to-br from-secondary-50 to-white p-8 rounded-xl shadow-lg border border-secondary-200 hover:shadow-xl transition-shadow">
+          <div class="value-card bg-gradient-to-br from-secondary-50 to-white p-8 rounded-xl shadow-lg border border-secondary-200 hover:shadow-xl transition-shadow">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 w-14 h-14 bg-secondary-500 rounded-xl flex items-center justify-center shadow-md">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,7 +193,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
 
-          <div class="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg border border-primary-200 hover:shadow-xl transition-shadow">
+          <div class="value-card bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg border border-primary-200 hover:shadow-xl transition-shadow">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center shadow-md">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
 
-          <div class="bg-gradient-to-br from-secondary-50 to-white p-8 rounded-xl shadow-lg border border-secondary-200 hover:shadow-xl transition-shadow">
+          <div class="value-card bg-gradient-to-br from-secondary-50 to-white p-8 rounded-xl shadow-lg border border-secondary-200 hover:shadow-xl transition-shadow">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 w-14 h-14 bg-secondary-500 rounded-xl flex items-center justify-center shadow-md">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,21 +230,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Agradecimiento Final -->
-  <section class="py-16 bg-gradient-to-br from-primary-500 to-secondary-600">
+  <section class="py-16 bg-gradient-to-br from-primary-500 to-secondary-600" id="final-thanks">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto">
-        <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 md:p-12 text-center">
-          <h2 class="font-display text-3xl text-dark-900 mb-6">
+        <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 md:p-12 text-center" id="thanks-card">
+          <h2 class="font-display text-3xl text-dark-900 mb-6" id="thanks-title">
             Gracias por estar aquí
           </h2>
-          <p class="text-lg text-dark-700 mb-6 leading-relaxed">
+          <p class="text-lg text-dark-700 mb-6 leading-relaxed" id="thanks-text">
             Cada pedido, cada reseña, cada foto que nos etiquetas en redes... todo eso hace que 
             este proyecto tenga sentido. Seguimos leyendo, seguimos creciendo.
           </p>
-          <p class="text-2xl font-semibold text-primary-600 mb-8">
+          <p class="text-2xl font-semibold text-primary-600 mb-8" id="thanks-emoji">
             📚✨
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center" id="thanks-buttons">
             <a href="/tienda" class="btn-primary">
               Explorar el Catálogo
             </a>
@@ -256,4 +256,208 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
+
+  <!-- Animaciones GSAP -->
+  <script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación del Hero al cargar
+    const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    heroTimeline
+      .from('#about-title', {
+        y: -40,
+        opacity: 0,
+        duration: 0.8
+      })
+      .from('#about-subtitle', {
+        y: -20,
+        opacity: 0,
+        duration: 0.6
+      }, '-=0.4');
+
+    // Animación de la sección "Nuestra Historia"
+    gsap.from('#story-title', {
+      scrollTrigger: {
+        trigger: '#our-story',
+        start: 'top 70%'
+      },
+      x: -50,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    gsap.from('#founder-quote', {
+      scrollTrigger: {
+        trigger: '#our-story',
+        start: 'top 65%'
+      },
+      x: -40,
+      opacity: 0,
+      duration: 0.9,
+      delay: 0.2,
+      ease: 'back.out(1.2)'
+    });
+
+    gsap.from('.story-paragraph', {
+      scrollTrigger: {
+        trigger: '#story-text',
+        start: 'top 75%'
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.2,
+      ease: 'power2.out'
+    });
+
+    // Animación del título del Timeline
+    gsap.from('#timeline-title', {
+      scrollTrigger: {
+        trigger: '#timeline-section',
+        start: 'top 70%'
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'back.out(1.5)'
+    });
+
+    // Animación del Timeline - items aparecen uno tras otro
+    gsap.from('.timeline-item', {
+      scrollTrigger: {
+        trigger: '#timeline-container',
+        start: 'top 70%'
+      },
+      x: -100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: {
+        amount: 1.2,
+        from: 'start'
+      },
+      ease: 'power2.out'
+    });
+
+    // Animación de los badges de año
+    gsap.from('.timeline-item > div:first-child > div', {
+      scrollTrigger: {
+        trigger: '#timeline-container',
+        start: 'top 70%'
+      },
+      scale: 0,
+      rotation: 180,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.25,
+      ease: 'back.out(2)'
+    });
+
+    // Animación del header de Valores
+    gsap.from('#values-header', {
+      scrollTrigger: {
+        trigger: '#values-section',
+        start: 'top 70%'
+      },
+      y: -30,
+      opacity: 0,
+      duration: 0.7
+    });
+
+    // Animación de las tarjetas de valores
+    gsap.from('.value-card', {
+      scrollTrigger: {
+        trigger: '#values-grid',
+        start: 'top 70%'
+      },
+      y: 60,
+      opacity: 0,
+      rotation: 3,
+      duration: 0.9,
+      stagger: {
+        amount: 0.6,
+        grid: [2, 2],
+        from: 'start'
+      },
+      ease: 'back.out(1.3)'
+    });
+
+    // Animación de los iconos dentro de las tarjetas
+    gsap.from('.value-card .w-14', {
+      scrollTrigger: {
+        trigger: '#values-grid',
+        start: 'top 70%'
+      },
+      scale: 0,
+      rotation: -180,
+      duration: 0.7,
+      stagger: 0.15,
+      delay: 0.3,
+      ease: 'back.out(2)'
+    });
+
+    // Animación del agradecimiento final
+    gsap.from('#thanks-card', {
+      scrollTrigger: {
+        trigger: '#final-thanks',
+        start: 'top 75%'
+      },
+      scale: 0.9,
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'back.out(1.5)'
+    });
+
+    gsap.from('#thanks-title', {
+      scrollTrigger: {
+        trigger: '#final-thanks',
+        start: 'top 70%'
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.7,
+      delay: 0.3
+    });
+
+    gsap.from('#thanks-text', {
+      scrollTrigger: {
+        trigger: '#final-thanks',
+        start: 'top 70%'
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.7,
+      delay: 0.5
+    });
+
+    gsap.from('#thanks-emoji', {
+      scrollTrigger: {
+        trigger: '#final-thanks',
+        start: 'top 70%'
+      },
+      scale: 0,
+      rotation: 360,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.7,
+      ease: 'back.out(2)'
+    });
+
+    gsap.from('#thanks-buttons a', {
+      scrollTrigger: {
+        trigger: '#final-thanks',
+        start: 'top 70%'
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.15,
+      delay: 0.9
+    });
+  </script>
 </BaseLayout>

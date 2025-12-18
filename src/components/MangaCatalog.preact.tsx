@@ -31,6 +31,55 @@ export default function MangaCatalog({
     }
   }, []);
 
+  useEffect(() => {
+  if (typeof window === 'undefined') return;
+  
+  const { gsap } = window as any;
+  if (!gsap) return;
+
+  // Animación del panel de filtros
+  gsap.from('.bg-white.rounded-lg.shadow-md', {
+    y: -30,
+    opacity: 0,
+    duration: 0.6,
+    delay: 0.3,
+    ease: 'power2.out'
+  });
+
+  // Animación del grid de mangas con stagger
+  gsap.from('.grid.grid-cols-1.sm\\:grid-cols-2 > div', {
+    y: 60,
+    opacity: 0,
+    duration: 0.8,
+    stagger: {
+      amount: 0.6,
+      from: 'start',
+      grid: 'auto'
+    },
+    ease: 'power2.out',
+    delay: 0.5
+  });
+
+  // Animación de la paginación
+  gsap.from('nav[aria-label="Paginación"]', {
+    y: 30,
+    opacity: 0,
+    duration: 0.6,
+    delay: 1
+  });
+
+  // Animación del carrito cuando aparece
+  if (showCart) {
+    gsap.from('.lg\\:col-span-1 .sticky', {
+      x: 50,
+      opacity: 0,
+      duration: 0.5,
+      ease: 'back.out(1.2)'
+    });
+  }
+}, [showCart]);
+
+
   const getSortedMangas = () => {
     const sorted = [...mangas];
     

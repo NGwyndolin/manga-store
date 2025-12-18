@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 import type { Manga, PageInfo } from '../types/index';
 import MangaCard from './MangaCard.preact';
 import { getMangaCatalog } from '../services/anilistApi';
@@ -23,6 +23,10 @@ export default function TiendaClient({ genres }: Props) {
   const [genre, setGenre] = useState('');
   const [page, setPage] = useState(1);
 
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const paginationRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const searchParam = params.get('search') || '';
@@ -46,6 +50,68 @@ export default function TiendaClient({ genres }: Props) {
       }
     }
   }, []);
+
+  // Hook para animaciones GSAP
+  useEffect(() => {
+    if (loading || mangas.length === 0) return;
+
+    const loadGsap = async () => {
+      const { gsap } = await import('gsap');
+      
+      // Pequeño delay para asegurar que el DOM esté listo
+      setTimeout(() => {
+        // Animar panel de filtros usando ref
+        if (filtersRef.current) {
+          gsap.from(filtersRef.current, {
+            y: -20,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+          });
+        }
+
+        // Animar información de resultados
+        const resultsInfo = document.getElementById('results-info');
+        if (resultsInfo) {
+          gsap.from(resultsInfo, {
+            x: -20,
+            opacity: 0,
+            duration: 0.5,
+            delay: 0.2
+          });
+        }
+
+        // Animar grid de mangas usando ref
+        if (gridRef.current) {
+          const cards = gridRef.current.children;
+          gsap.from(cards, {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: {
+              amount: 0.8,
+              grid: [2, 4],
+              from: 'start'
+            },
+            ease: 'power2.out',
+            delay: 0.3
+          });
+        }
+
+        // Animar paginación usando ref
+        if (paginationRef.current) {
+          gsap.from(paginationRef.current, {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            delay: 0.8
+          });
+        }
+      }, 50);
+    };
+
+    loadGsap();
+  }, [loading, mangas.length]);
 
   const loadCatalog = async (searchParam: string, genreParam: string, pageParam: number) => {
     setLoading(true);
@@ -127,7 +193,7 @@ export default function TiendaClient({ genres }: Props) {
   return (
     <div>
       {/* Filtros y Ordenamiento */}
-      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <div ref={filtersRef} class="bg-white rounded-lg shadow-md p-6 mb-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Filtro por género */}
           <div>
@@ -190,7 +256,7 @@ export default function TiendaClient({ genres }: Props) {
       </div>
 
       {/* Información de resultados */}
-      <div class="mb-6">
+      <div class="mb-6" id="results-info">
         <p class="text-dark-600">
           Mostrando {sortedMangas.length} de {pageInfo.total} resultados
           {page > 1 && ` - Página ${page}`}
@@ -198,7 +264,7 @@ export default function TiendaClient({ genres }: Props) {
       </div>
 
       {/* Grid de Mangas */}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div ref={gridRef} class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {sortedMangas.map((manga) => (
           <MangaCard key={manga.id} manga={manga} />
         ))}
@@ -206,7 +272,7 @@ export default function TiendaClient({ genres }: Props) {
 
       {/* Paginación */}
       {pageInfo.lastPage > 1 && (
-        <nav class="flex justify-center items-center gap-2 flex-wrap">
+        <nav ref={paginationRef} class="flex justify-center items-center gap-2 flex-wrap">
           <button
             onClick={() => handlePageChange(page - 1)}
             disabled={page === 1}
