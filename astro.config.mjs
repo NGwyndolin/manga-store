@@ -4,6 +4,9 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://NGwyndolin.github.io',
+  base: '/manga-store',
+  
   integrations: [
     preact({
       compat: true
