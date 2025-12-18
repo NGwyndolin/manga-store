@@ -46,40 +46,7 @@ npm install
 3. **Iniciar servidor de desarrollo**
 npm run dev
 
-
 El proyecto estará disponible en `http://localhost:4321`
-
-## 📁 Estructura del Proyecto
-
-/
-├── public/ # Archivos estáticos
-├── src/
-│ ├── components/ # Componentes reutilizables
-│ │ ├── Navigation.astro
-│ │ ├── Footer.astro
-│ │ ├── ThemeToggle.astro
-│ │ ├── CartWidget.preact.tsx
-│ │ ├── EventButton.preact.tsx
-│ │ ├── SearchBar.preact.tsx
-│ │ └── ...
-│ ├── layouts/ # Layouts de página
-│ │ ├── BaseLayout.astro
-│ │ └── DashboardLayout.astro
-│ ├── pages/ # Páginas (rutas)
-│ │ ├── index.astro
-│ │ ├── tienda.astro
-│ │ ├── dashboard.astro
-│ │ ├── comunidad.astro
-│ │ ├── contacto.astro
-│ │ └── sobre-nosotros.astro
-│ ├── stores/ # Estado global
-│ │ └── cartStore.ts
-│ └── styles/ # Estilos globales
-│ └── global.css
-├── tailwind.config.mjs
-├── astro.config.mjs
-└── package.json
-
 
 ## 🎨 Configuración de Colores
 
